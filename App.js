@@ -1,48 +1,222 @@
-//import liraries
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, Pressable, Dimensions} from 'react-native';
-import {AppContext} from './src/context/context';
-import UserTextInput from './src/components/UserTextInput';
-const {width, height} = Dimensions.get('window');
+// import React from 'react';
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createStackNavigator} from '@react-navigation/stack';
+// import {AppContext} from './src/context/context';
+// import UserList from './src/UI/UserList';
+// import AddUser from './src/UI/AddUser';
 
+// const Stack = createStackNavigator();
+// const App = () => {
+//   let users = [
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 2,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//     {
+//       id: 1,
+//       name: 'Muddaser',
+//       cgpa: 3.96,
+//       city: 'Murree',
+//     },
+//   ];
+//   const myFun = () => {
+//     console.log('Hello');
+//     alert('Hello');
+//   };
+//   const myFun1 = obj => {
+//     [
+//       ...users,
+//       {
+//         id: 1,
+//         name: 'Muddaser Nisar Abbasi',
+//         cgpa: 3.96,
+//         city: 'Murree',
+//       },
+//     ];
+//     console.log(users[users.length - 1]);
+//     console.log(users);
+//     // console.log(users);
+//   };
+//   return (
+//     <AppContext.Provider
+//       value={{
+//         users: users,
+//         myFun: myFun,
+//         myFun1: myFun1,
+//       }}
+
+//       //    value={{ value: [value, setValue], value2: [value2, setValue2] }}
+//     >
+//       <NavigationContainer>
+//         <Stack.Navigator headerMode="none" initialRouteName="UserList">
+//           <Stack.Screen name="UserList" component={UserList} />
+//           <Stack.Screen name="AddUser" component={AddUser} />
+//         </Stack.Navigator>
+//       </NavigationContainer>
+//     </AppContext.Provider>
+//   );
+// };
+
+// export default App;
+
+import React, {useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {AppContext} from './src/context/context';
+import UserList from './src/UI/UserList';
+import AddUser from './src/UI/AddUser';
+
+const Stack = createStackNavigator();
 const App = () => {
-  const users = [
+  const [users, setUsers] = useState([
     {
       id: 1,
       name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
     },
-  ];
+    {
+      id: 2,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+    {
+      id: 1,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+    {
+      id: 1,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+    {
+      id: 1,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+    {
+      id: 1,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+    {
+      id: 1,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+    {
+      id: 1,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+    {
+      id: 1,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+    {
+      id: 1,
+      name: 'Muddaser',
+      cgpa: 3.96,
+      city: 'Murree',
+    },
+  ]);
+  const myFun = () => {
+    console.log('Hello');
+    alert('Hello');
+  };
+  const myFun1 = obj => {
+    //[
+    users.push(obj);
+    //   ...users,
+    //   {
+    //     id: 1,
+    //     name: 'Muddaser Nisar Abbasi',
+    //     cgpa: 3.96,
+    //     city: 'Murree',
+    //   },
+    // ];
+    console.log(users[users.length - 1]);
+    console.log(users);
+    // console.log(users);
+  };
   return (
-    <AppContext.Provider value={{users}}>
-      <View style={styles.container}>
-        <Text>Context API Sample</Text>
-        <Pressable
-          onPress={() => alert(users)}
-          style={{
-            padding: 30,
-            backgroundColor: 'green',
-            margin: 15,
-            borderRadius: 15,
-            width: width * 0.5,
-            alignItems: 'center',
-          }}>
-          <Text style={{fontSize: 18, color: '#ffffff'}}>Get Data</Text>
-        </Pressable>
-        <UserTextInput />
-      </View>
+    <AppContext.Provider
+      value={{
+        users: users,
+        myFun: myFun,
+        myFun1: myFun1,
+      }}
+
+      //    value={{ value: [value, setValue], value2: [value2, setValue2] }}
+    >
+      <NavigationContainer>
+        <Stack.Navigator headerMode="none" initialRouteName="UserList">
+          <Stack.Screen name="UserList" component={UserList} />
+          <Stack.Screen name="AddUser" component={AddUser} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </AppContext.Provider>
   );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-  },
-});
-
-//make this component available to the app
 export default App;
