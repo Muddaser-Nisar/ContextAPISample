@@ -1,13 +1,24 @@
-import React, {useContext, useState} from 'react';
-import {View, Text, StyleSheet, Dimensions, FlatList} from 'react-native';
+import React, {useContext, useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import FloatingButton from '../components/FloatingButton';
 import Header from '../components/Header';
 import {AppContext} from '../context/context';
 const {width, height} = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useFocusEffect} from '@react-navigation/native';
+// import {useEffect} from 'react/cjs/react.production.min';
 const UserList = props => {
   const context = useContext(AppContext);
   const [user, setUser] = useState(context.users);
+  const [loader, setLoader] = useState(true);
+
   const removeFromContext = index => {
     // const hi={context.hy}
     context.myFun();
@@ -17,6 +28,15 @@ const UserList = props => {
     context.users.splice(index, 1);
     //  console.log(a);
   };
+  useEffect(() => {
+    setLoader(false);
+  }, []);
+
+  useFocusEffect(() => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 1000);
+  });
   const renderItem = ({item, index}) => {
     return (
       <View
@@ -53,32 +73,42 @@ const UserList = props => {
       />
     );
   };
-  return (
-    <View style={styles.container}>
-      <Header title="User List" />
+  if (loader) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size={30} color={'blue'} />
+      </View>
+    );
+  } else
+    return (
+      <View style={styles.container}>
+        <Header title="User List" />
 
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: '#FAF0E6',
-          marginTop: '7%',
-          marginBottom: '20%',
-        }}>
-        <FlatList
-          style={{width: width * 0.9}}
-          data={context.users}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index}
-          ItemSeparatorComponent={sep}
-          //  extraData={selectedId}
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: '#FAF0E6',
+            marginTop: '7%',
+            marginBottom: '20%',
+          }}>
+          <FlatList
+            style={{width: width * 0.9}}
+            data={context.users}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index}
+            ItemSeparatorComponent={sep}
+            //  extraData={selectedId}
+          />
+        </View>
+
+        <FloatingButton
+          onPressProp={() => {
+            setLoader(true);
+            props.navigation.navigate('AddUser');
+          }}
         />
       </View>
-
-      <FloatingButton
-        onPressProp={() => props.navigation.navigate('AddUser')}
-      />
-    </View>
-  );
+    );
 };
 
 // define your styles

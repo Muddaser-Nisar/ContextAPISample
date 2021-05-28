@@ -1,12 +1,20 @@
 import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 const UserTextInput = props => {
+  const dummyFunction = () => {
+    console.log("I'm Dummy Function from UserTextInput");
+  };
   return (
     <TextInput
       style={styles.textInput}
       onChangeText={props.onChange}
       defaultValue=""
+      //  autoCompleteType="email"
+      //  autoCapitalize="characters"
+      //   autoCorrect={true}
       //  value={props.value}
+      //    autoFocus={true}
+      // caretHidden={true}
       placeholder={props.title}
     />
   );
